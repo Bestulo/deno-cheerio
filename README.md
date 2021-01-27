@@ -15,7 +15,7 @@ $("content").text()
 - https://cheerio.js.org/
 - https://www.npmjs.com/package/cheerio
 
-## How I imported this
+## How I ported this
 
 - I just copied DefinitelyTyped/cheerio
 - erased some node and npm specifics that caused errors.
