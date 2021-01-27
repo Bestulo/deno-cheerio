@@ -4,10 +4,10 @@ Cheerio port to Deno with typings
 ## How to use
 
 ```js
-import { cheerio } from https://deno.land/x/cheerio@1.0.0/mod.ts
+import { cheerio } from "https://deno.land/x/cheerio@1.0.0/mod.ts";
 
-const $ = cheerio.load(html)
-$("content").text()
+const $ = cheerio.load(html);
+$("content").text();
 ```
 
 ## Documentation and relevant links
