@@ -6,4 +6,6 @@ export const getPickupLine = () =>
     .then(cheerio.load)
     .then(($) => $("#content").text().trim());
 
-getPickupLine().then(console.log);
+Deno.test("Cheerio test", async () => {
+  await getPickupLine().then(console.log);
+});
