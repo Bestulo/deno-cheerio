@@ -27,3 +27,9 @@ $("content").text()
 ## Pull-requests are welcome.
 
 If you feel you can fix, upgrade or improve this, just do it.
+
+## Depends on JSPM.io
+
+Be aware that this module imports from https://dev.jspm.io/cheerio@1.0.0-rc.3
+
+If JSPM moves that link, this port is done for. :)
