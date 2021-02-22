@@ -43,7 +43,7 @@ export interface TagElement {
   startIndex?: number;
 }
 
-type AttrFunction = (el: Element, i: number, currentValue: string) => any;
+type AttrFunction<T> = (el: Element, i: number, currentValue: string) => T;
 
 export interface Cheerio {
   // Document References
@@ -58,18 +58,18 @@ export interface Cheerio {
 
   attr(): { [attr: string]: string };
   attr(name: string): string | undefined;
-  attr(name: string, value: AttrFunction): Cheerio;
+  attr<T>(name: string, value: AttrFunction<T>): Cheerio;
   // `value` *can* be `any` here but:
   // 1. That makes type-checking the function-type useless
   // 2. It's converted to a string anyways
   attr(name: string, value: string): Cheerio;
   // The map's values *can* be `any` but they'll all be cast to strings
   // regardless.
-  attr(map: { [key: string]: any }): Cheerio;
+  attr(map: { [key: string]: unknown }): Cheerio;
 
-  data(): any;
-  data(name: string): any;
-  data(name: string, value: any): any;
+  data(): { [key: string]: string | number | boolean };
+  data(name: string): string | number | boolean | undefined;
+  data(name: string, value: string | number | boolean): Cheerio;
 
   val(): string;
   val(value: string): Cheerio;
@@ -91,7 +91,7 @@ export interface Cheerio {
   toggleClass(toggleSwitch?: boolean): Cheerio;
   toggleClass(
     func: (index: number, className: string, toggleSwitch: boolean) => string,
-    toggleSwitch?: boolean,
+    toggleSwitch?: boolean
   ): Cheerio;
 
   is(selector: string): boolean;
@@ -115,8 +115,8 @@ export interface Cheerio {
   parentsUntil(element: Element, filter?: string): Cheerio;
   parentsUntil(element: Cheerio, filter?: string): Cheerio;
 
-  prop(name: string): any;
-  prop(name: string, value: any): Cheerio;
+  prop<T>(name: string): T;
+  prop<T>(name: string, value: T): Cheerio;
 
   closest(): Cheerio;
   closest(selector: string): Cheerio;
@@ -145,8 +145,8 @@ export interface Cheerio {
 
   contents(): Cheerio;
 
-  each(func: (index: number, element: Element) => any): Cheerio;
-  map(func: (index: number, element: Element) => any): Cheerio;
+  each(func: (index: number, element: Element) => void): Cheerio;
+  map<T>(func: (index: number, element: Element) => T): Cheerio;
 
   filter(selector: string): Cheerio;
   filter(selection: Cheerio): Cheerio;
@@ -164,8 +164,8 @@ export interface Cheerio {
 
   eq(index: number): Cheerio;
 
-  get(): any[];
-  get(index: number): any;
+  get<T>(): T[];
+  get<T>(index: number): T;
 
   index(): number;
   index(selector: string): number;
@@ -186,29 +186,29 @@ export interface Cheerio {
   appendTo(target: Cheerio): Cheerio;
   prependTo(target: Cheerio): Cheerio;
 
-  append(content: string, ...contents: any[]): Cheerio;
-  append(content: Document, ...contents: any[]): Cheerio;
-  append(content: Document[], ...contents: any[]): Cheerio;
-  append(content: Cheerio, ...contents: any[]): Cheerio;
+  append<T>(content: string, ...contents: T[]): Cheerio;
+  append<T>(content: Document, ...contents: T[]): Cheerio;
+  append<T>(content: Document[], ...contents: T[]): Cheerio;
+  append<T>(content: Cheerio, ...contents: T[]): Cheerio;
 
-  prepend(content: string, ...contents: any[]): Cheerio;
-  prepend(content: Document, ...contents: any[]): Cheerio;
-  prepend(content: Document[], ...contents: any[]): Cheerio;
-  prepend(content: Cheerio, ...contents: any[]): Cheerio;
+  prepend<T>(content: string, ...contents: T[]): Cheerio;
+  prepend<T>(content: Document, ...contents: T[]): Cheerio;
+  prepend<T>(content: Document[], ...contents: T[]): Cheerio;
+  prepend<T>(content: Cheerio, ...contents: T[]): Cheerio;
 
-  after(content: string, ...contents: any[]): Cheerio;
-  after(content: Document, ...contents: any[]): Cheerio;
-  after(content: Document[], ...contents: any[]): Cheerio;
-  after(content: Cheerio, ...contents: any[]): Cheerio;
+  after<T>(content: string, ...contents: T[]): Cheerio;
+  after<T>(content: Document, ...contents: T[]): Cheerio;
+  after<T>(content: Document[], ...contents: T[]): Cheerio;
+  after<T>(content: Cheerio, ...contents: T[]): Cheerio;
 
   insertAfter(content: string): Cheerio;
   insertAfter(content: Document): Cheerio;
   insertAfter(content: Cheerio): Cheerio;
 
-  before(content: string, ...contents: any[]): Cheerio;
-  before(content: Document, ...contents: any[]): Cheerio;
-  before(content: Document[], ...contents: any[]): Cheerio;
-  before(content: Cheerio, ...contents: any[]): Cheerio;
+  before<T>(content: string, ...contents: T[]): Cheerio;
+  before<T>(content: Document, ...contents: T[]): Cheerio;
+  before<T>(content: Document[], ...contents: T[]): Cheerio;
+  before<T>(content: Cheerio, ...contents: T[]): Cheerio;
 
   insertBefore(content: string): Cheerio;
   insertBefore(content: Document): Cheerio;
@@ -240,13 +240,13 @@ export interface Cheerio {
   css(propertyName: string, value: number): Cheerio;
   css(
     propertyName: string,
-    func: (index: number, value: string) => string,
+    func: (index: number, value: string) => string
   ): Cheerio;
   css(
     propertyName: string,
-    func: (index: number, value: string) => number,
+    func: (index: number, value: string) => number
   ): Cheerio;
-  css(properties: Object): Cheerio;
+  css(properties: Record<string, unknown>): Cheerio;
 
   // Rendering
 
@@ -288,7 +288,7 @@ export interface Selector {
   (selector: string, context: Element, root: string): Cheerio;
   (selector: string, context: Element[], root: string): Cheerio;
   (selector: string, context: Cheerio, root: string): Cheerio;
-  (selector: any): Cheerio;
+  <T>(selector: T): Cheerio;
 }
 
 export interface Root extends Selector {
@@ -300,14 +300,11 @@ export interface Root extends Selector {
   parseHTML(
     data: string,
     context?: Document | null,
-    keepScripts?: boolean,
+    keepScripts?: boolean
   ): Document[];
 
   html(options?: CheerioParserOptions): string;
-  html(
-    dom: string | Cheerio | Element,
-    options?: CheerioParserOptions,
-  ): string;
+  html(dom: string | Cheerio | Element, options?: CheerioParserOptions): string;
 
   xml(dom?: string | Cheerio | Element): string;
 }
