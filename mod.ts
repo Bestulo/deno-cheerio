@@ -1,4 +1,4 @@
-import { dew } from "https://jspm.dev/npm:cheerio";
+import cheerio from "https://jspm.dev/npm:cheerio";
 import { CheerioAPI } from "./types.ts";
-export const cheerio: CheerioAPI = dew() as CheerioAPI;
+export { cheerio };
 export * from "./types.ts";
