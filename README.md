@@ -1,4 +1,5 @@
 # deno-cheerio
+
 Cheerio port to Deno with typings
 
 ## How to use
@@ -28,8 +29,8 @@ $("content").text();
 
 If you feel you can fix, upgrade or improve this, just do it.
 
-## Depends on JSPM.io
+## Depends on esm.sh
 
-Be aware that this module imports from https://dev.jspm.io/cheerio@1.0.0-rc.3
+Be aware that this module imports from https://esm.sh/cheerio
 
-If JSPM moves that link, this port is done for. :)
+If `esm` moves that link, this port is done for. :)
