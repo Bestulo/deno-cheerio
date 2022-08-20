@@ -1,4 +1,2 @@
-import cheerio from "https://jspm.dev/npm:cheerio";
-import { CheerioAPI } from "./types.ts";
+import * as cheerio from "https://esm.sh/cheerio";
 export { cheerio };
-export * from "./types.ts";
