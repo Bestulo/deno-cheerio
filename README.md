@@ -20,10 +20,18 @@ Cheerio port to Deno with typings
 ## How to use
 
 ```js
-import { cheerio } from "https://deno.land/x/cheerio@1.0.6/mod.ts";
+// Option 1 (preferred): from ESM
+import * as cheerio from "https://esm.sh/cheerio@1.0.0-rc.12";
 
 const $ = cheerio.load(html);
 $("content").text();
+```
+
+Another import option:
+
+```js
+// from denoland (unnecessary but do as you wish)
+import { cheerio } from "https://deno.land/x/cheerio@1.0.7/mod.ts";
 ```
 
 ## Documentation and relevant links
@@ -31,7 +39,7 @@ $("content").text();
 - https://cheerio.js.org/
 - https://www.npmjs.com/package/cheerio
 
-## How I ported this
+## Old (legacy) port process:
 
 - I just copied DefinitelyTyped/cheerio
 - erased some node and npm specifics that caused errors.
@@ -39,6 +47,16 @@ $("content").text();
 - exported all interfaces (typings previously relied on tsc ambient import from .d.ts)
 - added `& Cheerio` to the normal returned value of `cheerio.load(html)`
   - Root is callable, Cheerio can be used for methods, so as they are mixed, they allow for $ to be used normally.
+
+## Current port process
+
+- @artze removed all old port stuff ([PR](https://github.com/Bestulo/deno-cheerio/pull/9))
+- Imported from `esm`
+
+```js
+import * as cheerio from "https://esm.sh/cheerio";
+export { cheerio };
+```
 
 ## Pull-requests are welcome.
 
