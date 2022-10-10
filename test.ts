@@ -2,7 +2,7 @@ import { cheerio } from "./mod.ts";
 import { assertEquals } from "https://deno.land/std/testing/asserts.ts";
 
 export const getPickupLine = () =>
-  fetch("http://www.pickuplinegen.com")
+  fetch("http://www.google.com")
     .then((res) => res.text())
     .then(cheerio.load)
     .then(($) => $("#content").text().trim());
