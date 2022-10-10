@@ -7,9 +7,11 @@ At the moment, `cheerio` can be imported into Deno directly by using [esm.sh](ht
 
 ### **This fact makes this current module irrelevant and deprecated.**
 
-If ESM were to change things, and importing directly from it were to no longer become possible (unlikely but who knows), I will accept pull requests in this module to make `cheerio` work on Deno again.
+Cheerio works on Deno out of the box by importing it directly from ESM.
 
-Until then, consider this module deprecated and legacy. You're free to use it but there's no point to that.
+If ESM were to change things, and importing directly from it were to no longer become possible (unlikely but who knows), I will accept pull requests in this module to keep Cheerio going on Deno.
+
+Until then, consider this module deprecated and legacy and use ESM. You're free to use this module but there's no point to that.
 
 ---
 
