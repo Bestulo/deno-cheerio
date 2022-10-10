@@ -1,14 +1,14 @@
 import { cheerio } from "./mod.ts";
 import { assertEquals } from "https://deno.land/std/testing/asserts.ts";
 
-export const getPickupLine = () =>
+export const getWebsite = () =>
   fetch("http://www.google.com")
     .then((res) => res.text())
     .then(cheerio.load)
     .then(($) => $("#content").text().trim());
 
 Deno.test("Cheerio test", async () => {
-  await getPickupLine().then(console.log);
+  await getWebsite().then(console.log);
 });
 
 Deno.test("Data attribute types are correct", () => {
