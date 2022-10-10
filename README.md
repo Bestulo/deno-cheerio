@@ -1,3 +1,20 @@
+# Important deprecation clarification
+
+At the moment, `cheerio` can be imported into Deno directly by using [esm.sh](https://esm.sh/).
+
+[Note from @artze](https://github.com/Bestulo/deno-cheerio/pull/9):
+> Do take note that, `cheerio` from `v1.0.0` onwards can be imported in a deno app directly with `import * as cheerio from "https://esm.sh/cheerio"` without this `deno-cheerio` wrapper.
+
+### **This fact makes this current module irrelevant and deprecated.**
+
+If ESM were to change things, and importing directly from it were to no longer become possible (unlikely but who knows), I will accept pull requests in this module to make `cheerio` work on Deno again.
+
+Until then, consider this module deprecated and legacy. You're free to use it but there's no point to that.
+
+---
+
+Original readme:
+
 # deno-cheerio
 
 Cheerio port to Deno with typings
