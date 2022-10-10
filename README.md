@@ -13,8 +13,6 @@ Until then, consider this module deprecated and legacy. You're free to use it bu
 
 ---
 
-Original readme:
-
 # deno-cheerio
 
 Cheerio port to Deno with typings
